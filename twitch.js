@@ -49,4 +49,22 @@ Bot.on('message', chatter => {
     }
 
   })
+
+  var viewercache = []
+  var viewerdb = require("./Models/VIEWER")
+  Bot.on("message", async chatter => {
+    console.log(viewercache)
+    // if cache
+  if (viewercache.find(v => chatter.user_id === v)) return;
+  //if db
+  var vdb = await viewerdb.find({"twitch": chatter.user_id})
+  console.log(vdb)
+  if (vdb.length > 0) return viewercache.push(`${chatter.user_id}`)
+  // create
+  viewercache.push(`${chatter.user_id}`)
+   await new viewerdb({twitch: `${chatter.user_id}`}).save().then(
+    Bot.say("Willkommen @" + chatter.display_name)
+  )
+
+  })
   
