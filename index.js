@@ -13,6 +13,7 @@ const bot = client;
 exports.client = client;
 exports.config = config;
 client.commands = new Discord.Collection();
+client.twitchcommands = new Discord.Collection();
 
 
 //Database connection
@@ -45,9 +46,9 @@ client.user.setActivity(status, {type: "PLAYING"});
 }); //Game
 
 //Command Parser
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+const commandFiles = fs.readdirSync('./dc-commands').filter(file => file.endsWith('.js'));
 for (const file of commandFiles) {
-	const command = require(`./commands/${file}`);
+	const command = require(`./dc-commands/${file}`);
 
     client.commands.set(command.name, command);
     console.log("Found an command => " + command.name)
@@ -74,5 +75,7 @@ require("./react-to-older-messages")
 require("./events/welcome")
 
 
+//twitch
+require("./twitch")
 
 bot.login(config.token)
