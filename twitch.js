@@ -8,6 +8,8 @@ const Bot = new TwitchBot({
   oauth: 'oauth:epdjp8pbpyoyf5et0hbgj5locz3623',
   channels: ['Dustin_DM']
 })
+exports.twitch_bot = Bot;
+
 
 Bot.on('join', channel => {
     console.log(`[Twitch] ${Bot.username} is now connectet to ` + channel)
