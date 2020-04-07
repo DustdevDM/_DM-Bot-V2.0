@@ -8,6 +8,8 @@ const Bot = new TwitchBot({
   oauth: 'oauth:epdjp8pbpyoyf5et0hbgj5locz3623',
   channels: ['Dustin_DM']
 })
+exports.twitch_bot = Bot;
+
 
 Bot.on('join', channel => {
     console.log(`[Twitch] ${Bot.username} is now connectet to ` + channel)
@@ -45,6 +47,24 @@ Bot.on('message', chatter => {
         console.error(error);
         Bot.say("@" + chatter.display_name + ' Ein Fehler ist beim ausführen des Commands aufgetreten');
     }
+
+  })
+
+  var viewercache = []
+  var viewerdb = require("./Models/VIEWER")
+  Bot.on("message", async chatter => {
+    console.log(viewercache)
+    // if cache
+  if (viewercache.find(v => chatter.user_id === v)) return;
+  //if db
+  var vdb = await viewerdb.find({"twitch": chatter.user_id})
+  console.log(vdb)
+  if (vdb.length > 0) return viewercache.push(`${chatter.user_id}`)
+  // create
+  viewercache.push(`${chatter.user_id}`)
+   await new viewerdb({twitch: `${chatter.user_id}`}).save().then(
+    Bot.say("Willkommen @" + chatter.display_name)
+  )
 
   })
   
