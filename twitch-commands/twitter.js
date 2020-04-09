@@ -5,7 +5,7 @@ module.exports = {
 	execute (message, args, Bot) {
         const { client, config} = require('../index')
 
-        Bot.say(`@${message.display_name} -> http://twitter.dustin-dm.de`)
+        Bot.say(`@${message.display_name} -> https://twitter.com/Dustin_DM_`)
     
 			
 	},
