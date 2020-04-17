@@ -14,6 +14,36 @@ exports.twitch_bot = Bot;
 Bot.on('join', channel => {
     console.log(`[Twitch] ${Bot.username} is now connectet to ` + channel)
     Bot.say("Der Chat hat meine volle aufmerksamkeit")
+
+    setInterval(() => {
+      let followsprüche = [
+        "den nächsten Stream nicht zu verpassen!",
+        "Dustin beim nächstem mal wieder Failen zu sehen",
+        "beim nächsten mal wieder zu sehen wie Dustin sich 100 mal verspricht",
+        "Dustin bei seiner Mission zu helfen Coin Master zu werden",
+        "Dustin zu helfen die Welt zu übernehmen",
+        "Dustin zu helfen Gronkhs Kanal zu übernehmen",
+        "Dustin zu helfen ein foRtNiTe PrOfI zu werden"
+      ]
+      
+      let followspruch = followsprüche[Math.floor(Math.random() * followsprüche.length)];
+      Bot.say("Wenn euch der Stream gefällt dann lasst doch nen Follow da um " + followspruch)
+    }, 900000
+    );
+
+    setInterval(() => {
+      let spendensprüche = [
+      "Dann gebt Dustin doch einen Euro aus eurer Sofa ritze",
+      "Dann gebt Dustin doch den Euro den ihr vorhin auf der Straße gefunden habt",
+      "Dann gebt Dustin euer komplettes Geld... Oder nur einen Euro. Der reicht auch... (fürs erste)",
+      "Dann gebt Dustin nen Euro damit er sich wieder Fake Follows kaufen kann... Eh was?",
+      "Dann gebt Dustin doch nen Euro damit er mich nicht wieder heimlich offline nimmt weil ich zu teuer bin :( "
+    ]
+    
+    let spendenspruch = spendensprüche[Math.floor(Math.random() * spendensprüche.length)];
+      Bot.say("Ihr wollt Dustin unterstützen und seinen ewigen Dank erhalten? " + spendenspruch + " --> https://www.tipeeestream.com/dustin-dm/donation")
+    }, 2700000
+    );
   })
 
   Bot.on('part', channel => {
@@ -40,6 +70,8 @@ Bot.on('message', chatter => {
     let args = messageArray.slice(1);
 
     if (!client.twitchcommands.has(alias)) return;
+    if (chatter.message.startsWith(prefix) == false || chatter.message.startsWith("!") == false ) return;
+
 
     try {
         client.twitchcommands.get(alias).execute(chatter, args, Bot);
