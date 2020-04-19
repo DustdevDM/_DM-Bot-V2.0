@@ -28,7 +28,7 @@ Bot.on('join', channel => {
       
       let followspruch = followsprüche[Math.floor(Math.random() * followsprüche.length)];
       Bot.say("Wenn euch der Stream gefällt dann lasst doch nen Follow da um " + followspruch)
-    }, 900000
+    }, 1020000
     );
 
     setInterval(() => {
@@ -42,7 +42,7 @@ Bot.on('join', channel => {
     
     let spendenspruch = spendensprüche[Math.floor(Math.random() * spendensprüche.length)];
       Bot.say("Ihr wollt Dustin unterstützen und seinen ewigen Dank erhalten? " + spendenspruch + " --> https://www.tipeeestream.com/dustin-dm/donation")
-    }, 2700000
+    }, 1500000
     );
   })
 
@@ -69,8 +69,9 @@ Bot.on('message', chatter => {
     let alias = messageArray[0].replace(prefix, "");
     let args = messageArray.slice(1);
 
+    console.log("Ciowertjweiotwej")
     if (!client.twitchcommands.has(alias)) return;
-    if (chatter.message.startsWith(prefix) == false || chatter.message.startsWith("!") == false ) return;
+    if (chatter.message.startsWith(prefix) == false) return;
 
 
     try {
