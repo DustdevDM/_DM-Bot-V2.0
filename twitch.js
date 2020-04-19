@@ -33,7 +33,8 @@ Bot.on('join', channel => {
       "Dann gebt Dustin doch den Euro den ihr vorhin auf der Straße gefunden habt",
       "Dann gebt Dustin euer komplettes Geld... Oder nur einen Euro. Der reicht auch... (fürs erste)",
       "Dann gebt Dustin nen Euro damit er sich wieder Fake Follows kaufen kann... Eh was?",
-      "Dann gebt Dustin doch nen Euro damit er mich nicht wieder heimlich offline nimmt weil ich zu teuer bin :( "
+      "Dann gebt Dustin doch nen Euro damit er mich nicht wieder heimlich offline nimmt weil ich zu teuer bin :( ",
+      "Dann gebt Dustin doch einpaar Sternis damit er Tom Nooks schulden endlich abbezahlen kann"
     ]
     
     let spendenspruch = spendensprüche[Math.floor(Math.random() * spendensprüche.length)];
