@@ -3,11 +3,7 @@ const fs = require("fs")
 
 const TwitchBot = require('twitch-bot')
 
-const Bot = new TwitchBot({
-  username: 'dustin_dm_bot',
-  oauth: 'oauth:epdjp8pbpyoyf5et0hbgj5locz3623',
-  channels: ['Dustin_DM']
-})
+const Bot = new TwitchBot(config.twitch)
 exports.twitch_bot = Bot;
 
 
