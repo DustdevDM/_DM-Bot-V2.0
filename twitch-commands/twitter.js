@@ -2,10 +2,10 @@ module.exports = {
 	name: 'twitter',
 	description: 'Sendet einen Link zu Dustin_DM\' Twitter Account',
     usage: `twitter` ,
-	execute (message, args, Bot) {
+	execute (target, context, msg, self, TwitchBot) {
         const { client, config} = require('../index')
 
-        Bot.say(`@${message.display_name} -> https://twitter.com/Dustin_DM_`)
+        TwitchBot.say(target,`@${context["display-name"]} -> https://twitter.com/Dustin_DM_`)
     
 			
 	},
