@@ -12,6 +12,7 @@ const opts = {
 const TwitchBot = new tmi.client(opts);
 exports.twitch_bot = TwitchBot;
 TwitchBot.on("connected", (addr, port) => {
+  require("./twitch-events/tipee")
   console.log(`* Connected to ${addr}:${port}`);
   TwitchBot.say("#dustin_dm" ,"Ich bin nun mit diesen Chat verbunden")
 
@@ -82,6 +83,7 @@ var viewercache = []
 var viewerdb = require("./Models/VIEWER")
 
 TwitchBot.on("message",async (target, context, msg, self) => {
+  if (target != "#dustin_dm") return;
   if (viewercache.find(v => context["user-id"] === v)) return;
   //if db
   var vdb = await viewerdb.find({"twitch": context["user-id"]})
