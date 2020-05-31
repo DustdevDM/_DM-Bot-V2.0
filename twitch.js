@@ -1,6 +1,9 @@
 const {client, config} = require('./index.js')
 const fs = require("fs")
 
+const {livelistner} = require("./twitch-events/livechecker")
+
+
 const tmi = require('tmi.js');
 const opts = {
   identity: {
@@ -16,7 +19,8 @@ TwitchBot.on("connected", (addr, port) => {
   console.log(`* Connected to ${addr}:${port}`);
   TwitchBot.say("#dustin_dm" ,"Ich bin nun mit diesen Chat verbunden")
 
-  setInterval(() => {
+  livelistner.on("live", () => {
+  var postcommendloop = setInterval(() => {
     var randomspruch = [
       [
     "Ihr wollt Dustin unterstützen und seinen ewigen Dank erhalten? Dann gebt Dustin doch einen Euro aus eurer Sofa ritze --> https://www.tipeeestream.com/dustin-dm/donation",
@@ -49,7 +53,9 @@ TwitchBot.on("connected", (addr, port) => {
     TwitchBot.say("#dustin_dm",spruch)
   }, 600000
   );
+livelistner.once("offline", () => {clearInterval(postcommendloop)})
 });
+})
 
  //Command Parser
  const commandFiles = fs.readdirSync('./twitch-commands').filter(file => file.endsWith('.js'));
@@ -71,7 +77,7 @@ TwitchBot.on("message", (target, context, msg, self) => {
   if (msg.startsWith(prefix) == false) return;
 
   try {
-      client.twitchcommands.get(alias).execute(target, context, msg, self, TwitchBot);
+      client.twitchcommands.get(alias).execute(target, context, msg, self, TwitchBot, args);
   } catch (error) {
       console.error(error);
       TwitchBot.say(target,"@" + context["display-name"] + ' Ein Fehler ist beim ausführen des Commands aufgetreten');
@@ -95,4 +101,14 @@ TwitchBot.on("message",async (target, context, msg, self) => {
   )
 })
 
+require("./twitch-events/livechecker")
+
 TwitchBot.connect();
+
+livelistner.on("live", () => {
+  TwitchBot.say("#dustin_dm", "Hey!")
+})
+
+livelistner.on("offline", () => {
+  TwitchBot.say("#dustin_dm", "Feierabend! Schließt du heute ab?")
+})

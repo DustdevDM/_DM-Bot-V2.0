@@ -2,8 +2,12 @@ const {twitch_bot} = require("../twitch")
 const {client, config} = require("../index")
 var ioClient = require('socket.io-client');
 
-const fetch = require("node-fetch")
+const {livelistner} = require("./livechecker")
 
+const fetch = require("node-fetch")
+    var tipee = null
+
+    livelistner.on("live", () => {
     fetch("https://api.tipeeestream.com/v2.0/site/socket").then(res => res.json())
     .then(json => {
         if (json.message != "success") return console.log("[Tipee Stream] ERROR: Cant get Websocket API Path")
@@ -11,7 +15,7 @@ const fetch = require("node-fetch")
         console.log(`${json.datas.host}:${json.datas.port}`)
         var baseurl = `${json.datas.host}:${json.datas.port}?access_token=${config.tipee}`
         
-        var tipee = ioClient(baseurl);
+        tipee = ioClient(baseurl);
         tipee.connect()
         tipee.on('connect', function(){
             console.log("[Tipeee] Websocket connected")
@@ -19,7 +23,7 @@ const fetch = require("node-fetch")
                 room: config.tipee,
                 username: 'dustin-dm'
               })
-
+              livelistner.once("offline", () => {tipee.destroy()})
         });
         tipee.on('new-event', function(data){
             //Donation
@@ -44,4 +48,4 @@ const fetch = require("node-fetch")
        
     
     });
-
+})
