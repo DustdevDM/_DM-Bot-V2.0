@@ -28,24 +28,26 @@ fetch("https://api.twitch.tv/helix/streams?user_id=179697954", {headers: {"Clien
     //Dustin is not Streaming
     if (json.data.length == 0){
         if (saved_request == null || saved_request.data.length == 0){
-            //Dustin is and was not Streaming
+            console.log("Dustin is and was not Streaming")
         }
         else if (saved_request.data.length != 0){
-            //Dustin just endet a Stream
+            console.log("Dustin just endet a Stream")
             livelistner.emit("offline")
         }
     }
     //Dustin is Streaming
     else if (json.data.length != 0) {
-        if (saved_request.data[0].id == json.data[0].id ){
-            //Dustin is STILL Live
-        }
-        else if (saved_request == null){
-            //Bot crashed while Dustin was and is live
+        if (saved_request == null){
+            console.log("Bot crashed while Dustin was and is live")
             livelistner.emit("live")
+            
         }
-        else if (saved_request.data[0].id != json.data[0].id){
-            //Dustin is now Live with a new Livestream
+        else if (saved_request.data.length != 0 && saved_request.data[0].id == json.data[0].id ){
+            console.log("Dustin is STILL Live")
+        }
+        
+        else if (json.data[0].id){
+            console.log("Dustin is now Live with a new Livestream")
             livelistner.emit("live")
         }
     }
@@ -53,7 +55,7 @@ fetch("https://api.twitch.tv/helix/streams?user_id=179697954", {headers: {"Clien
     saved_request = json
 })
 
-})}, 10000);
+})});
 
 
 
