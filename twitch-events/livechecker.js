@@ -21,14 +21,13 @@ fetch(`https://id.twitch.tv/oauth2/token?client_id=${config.twitch.api.clientID}
 })
 }
 //179697954
-setTimeout(() => { var checkforonline = schedule.scheduleJob("*/3 * * * *", function(){
+setTimeout(() => { var checkforonline = schedule.scheduleJob("*/1 * * * *", function(){
     
 fetch("https://api.twitch.tv/helix/streams?user_id=179697954", {headers: {"Client-ID": config.twitch.api.clientID, "Authorization": `Bearer ${barer}`}}).then(res => res.json())
 .then(json => {
     //Dustin is not Streaming
     if (json.data.length == 0){
         if (saved_request == null || saved_request.data.length == 0){
-            console.log("Dustin is and was not Streaming")
         }
         else if (saved_request.data.length != 0){
             console.log("Dustin just endet a Stream")
@@ -43,7 +42,6 @@ fetch("https://api.twitch.tv/helix/streams?user_id=179697954", {headers: {"Clien
             
         }
         else if (saved_request.data.length != 0 && saved_request.data[0].id == json.data[0].id ){
-            console.log("Dustin is STILL Live")
         }
         
         else if (json.data[0].id){
