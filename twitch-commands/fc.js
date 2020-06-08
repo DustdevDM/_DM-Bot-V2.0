@@ -2,10 +2,10 @@ module.exports = {
 	name: 'fc',
 	description: 'Schickt Dustins Freundescode von der Nintendo Switch',
     usage: `fc` ,
-	execute (target, context, msg, self, TwitchBot) {
+	execute (channel, userstate, message, self, args, TwitchBot) {
         const { client, config} = require('../index')
 
-        TwitchBot.say(target,`@${context["display-name"]} -> SW-5759-3138-7199
+        TwitchBot.say(channel,`@${userstate["display-name"]} -> SW-5759-3138-7199
 `)
     
 			

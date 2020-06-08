@@ -66,21 +66,21 @@ livelistner.once("offline", () => {clearInterval(postcommendloop)})
      console.log("[Twitch] Found an command => " + command.name)
  }
 
-TwitchBot.on("message", (target, context, msg, self) => {
+TwitchBot.on("message", (channel, userstate, message, self) => {
   let prefix = config.prefix;
-  let messageArray = msg.split(" ")
+  let messageArray = message.split(" ")
   let alias = messageArray[0].replace(prefix, "");
   let args = messageArray.slice(1);
 
   if (!client.twitchcommands.has(alias)) return;
   if (self) return;
-  if (msg.startsWith(prefix) == false) return;
+  if (message.startsWith(prefix) == false) return;
 
   try {
-      client.twitchcommands.get(alias).execute(target, context, msg, self, TwitchBot, args);
+      client.twitchcommands.get(alias).execute(channel, userstate, message, self, args, TwitchBot);
   } catch (error) {
       console.error(error);
-      TwitchBot.say(target,"@" + context["display-name"] + ' Ein Fehler ist beim ausführen des Commands aufgetreten');
+      TwitchBot.say(channel,"@" + userstate["display-name"] + ' Ein Fehler ist beim ausführen des Commands aufgetreten');
   }
 
 })

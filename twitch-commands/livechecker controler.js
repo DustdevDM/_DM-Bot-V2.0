@@ -2,8 +2,8 @@ module.exports = {
 	name: 'on',
 	description: 'Ein Command un den Live Checker des Bots zu manipulieren',
     usage: `on (off)` ,
-	execute (target, context, msg, self, TwitchBot, args) {
-		if(context["user-id"] == "179697954"){
+	execute (channel, userstate, message, self, args, TwitchBot) {
+		if(userstate["user-id"] == "179697954"){
 		const {livelistner} = require("../twitch-events/livechecker")
 
 		if (args[0]){
@@ -14,7 +14,7 @@ module.exports = {
 		}
 	}
 	else {
-		TwitchBot.say(target, "Du hast leider keine Berechtigung diesen Command zu benutzen")
+		TwitchBot.say(channel, "Du hast leider keine Berechtigung diesen Command zu benutzen")
 	}
     
 			
