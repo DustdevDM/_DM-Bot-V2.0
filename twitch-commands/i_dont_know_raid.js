@@ -22,7 +22,6 @@ module.exports = {
         //Fetch Streams from Follower
         await fetch(`https://api.twitch.tv/helix/users/follows?from_id=${userstate["user-id"]}&first=100`, {headers: {"Client-ID": config.twitch.api.clientID, "Authorization": `Bearer ${barer}`}}).then(res => res.json())
         .then(async jsonfollowing => {
-            console.log(jsonfollowing)
             await fetch(`https://api.twitch.tv/helix/streams?${jsonfollowing.data.map(x => "user_id=" + x.to_id).join("&")}`, {headers: {"Client-ID": config.twitch.api.clientID, "Authorization": `Bearer ${barer}`}}).then(res => res.json())
             .then(async jsonfollowerstreams => {
               if (jsonfollowerstreams.data.length != 0){
