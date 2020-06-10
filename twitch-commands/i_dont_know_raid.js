@@ -25,8 +25,9 @@ module.exports = {
             await fetch(`https://api.twitch.tv/helix/streams?${jsonfollowing.data.map(x => "user_id=" + x.to_id).join("&")}`, {headers: {"Client-ID": config.twitch.api.clientID, "Authorization": `Bearer ${barer}`}}).then(res => res.json())
             .then(async jsonfollowerstreams => {
               if (jsonfollowerstreams.data.length != 0){
-              await fetch("https://api.twitch.tv/helix/games?id=" + jsonfollowerstreams.data[0].game_id, {headers: { 'Client-ID': config.twitch.api.clientID, "Authorization": `Bearer ${barer}`}}).then(res => res.json()).then(game => {
-                raidbarepersonen.follower = {streamer: jsonfollowerstreams.data[0].user_name, game: game.data[0].name}})}
+                var choosenfollowingstream = jsonfollowerstreams.data[Math.floor(Math.random() * jsonfollowerstreams.data.length)]              
+                await fetch("https://api.twitch.tv/helix/games?id=" + choosenfollowingstream.game_id, {headers: { 'Client-ID': config.twitch.api.clientID, "Authorization": `Bearer ${barer}`}}).then(res => res.json()).then(game => {
+                raidbarepersonen.follower = {streamer: choosenfollowingstream.user_name, game: game.data[0].name}})}
             })
         })
       //Fetch Streams with same Game and same Language
@@ -39,7 +40,11 @@ module.exports = {
             else {
              await fetch(`https://api.twitch.tv/helix/streams?language=de&game_id=${game.data[0].id}&first=1`, {headers: {"Client-ID":config.twitch.api.clientID, "Authorization": `Bearer ${barer}`}}).then(res => res.json())
               .then(randomstream => {
-                if (randomstream.data.length != 0){raidbarepersonen.samegame = {streamer: randomstream.data[0].user_name, game: game.data[0].name}}
+                if (randomstream.data.length != 0){
+                  var choosenrandomstream = randomstream.data[Math.floor(Math.random() * randomstream.data.length)]
+                  raidbarepersonen.samegame = {streamer: choosenrandomstream.user_name, game: game.data[0].name}
+                
+                }
               })
             }
           
