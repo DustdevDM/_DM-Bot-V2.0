@@ -111,9 +111,3 @@ livelistner.on("live", () => {
 TwitchBot.connect();
 });
 
-
-setTimeout(() => {
-  livelistner.emit("live")
-}, 30000);
-
-
