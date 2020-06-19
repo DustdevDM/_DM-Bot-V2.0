@@ -30,12 +30,10 @@ client.on("guildMemberAdd",async (user) => {
            var acceptrules = channel.send(new RichEmbed().setColor("#00b894").setTitle("Ende des Tutorials:").setDescription("Alles okay soweit? Dann bist du hiermit am Ende des Tutorials angelangt. Jetzt musst du nur noch auf das ✅ drücken um auf das nächste Level zu kommen und um die Regeln zu akzeptieren")).then(m => m.react("✅"))
            user.guild.channels.get(ruleschan.channel).fetchMessage(ruleschan.msg).then(m => rules = m.content.replace("Discord Nutzervereinbarung", "[Discord Nutzervereinbarung](https://discordapp.com/terms)"))
             rulemsg.then(m => m.edit(new RichEmbed().setColor("#00cec9").setTitle("Schau dir mal die Regeln an.").setDescription(rules)))
-            twitch_bot.say("#dustin_dm",user.user.tag + " ist gerade dem _DM Crew Discord Server beigetreten.        Du willst auch joinen? --> _discord")
         })
 }
     //Rejoined Member
     else {     
-            twitch_bot.say("#dustin_dm",user.user.tag + " ist gerade erneut dem _DM Crew Discord Server beigetreten.         Du willst auch joinen? --> _discord")
              user.guild.channels.get("671004370313412628").send(new RichEmbed().setDescription(`<@${user.id}` + "> ist gerade der _DM Crew beigetreten\n**Willkommen zurück^^**")
             .setColor("RANDOM")
             .setThumbnail(user.user.displayAvatarURL))
@@ -77,7 +75,6 @@ client.on("guildMemberRemove", (user) => {
     if (user.guild.id != "671004136325513237"){return;}
     client.guilds.get(user.guild.id).
     channels.get("671004370313412628").send(new RichEmbed().setDescription(`${user.user.tag} hat gerade die _DM Crew verlassen`).setColor("RANDOM").setThumbnail(user.user.displayAvatarURL))
-    twitch_bot.say("#dustin_dm",user.user.tag + " hat den _DM Crew Discord Server verlassen")
 
 })
 

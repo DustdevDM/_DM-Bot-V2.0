@@ -7,7 +7,6 @@ const {livelistner} = require("./livechecker")
 const fetch = require("node-fetch")
     var tipee = null
 
-    livelistner.on("live", () => {
     fetch("https://api.tipeeestream.com/v2.0/site/socket").then(res => res.json())
     .then(json => {
         if (json.message != "success") return console.log("[Tipee Stream] ERROR: Cant get Websocket API Path")
@@ -48,4 +47,4 @@ const fetch = require("node-fetch")
        
     
     });
-})
+

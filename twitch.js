@@ -1,6 +1,7 @@
 const {client, config} = require('./index.js')
 const fs = require("fs")
 
+require("./twitch-events/livechecker")
 const {livelistner} = require("./twitch-events/livechecker")
 
 
@@ -19,7 +20,6 @@ TwitchBot.on("connected", (addr, port) => {
   console.log(`* Connected to ${addr}:${port}`);
   TwitchBot.say("#dustin_dm" ,"Ich bin nun mit diesen Chat verbunden")
 
-  livelistner.on("live", () => {
   var postcommendloop = setInterval(() => {
     var randomspruch = [
       [
@@ -54,7 +54,7 @@ TwitchBot.on("connected", (addr, port) => {
   }, 600000
   );
 livelistner.once("offline", () => {clearInterval(postcommendloop)})
-});
+
 })
 
  //Command Parser
@@ -97,18 +97,23 @@ TwitchBot.on("message",async (target, context, msg, self) => {
   // create
   viewercache.push(`${context["user-id"]}`)
    await new viewerdb({twitch: `${context["user-id"]}`}).save().then(
-    TwitchBot.say(target,"Willkommen @" + context["display-name"])
+    TwitchBot.say(target,"Hey @" + context["display-name"])
   )
 })
 
-require("./twitch-events/livechecker")
-
-TwitchBot.connect();
-
-livelistner.on("live", () => {
-  TwitchBot.say("#dustin_dm", "Hey!")
-})
 
 livelistner.on("offline", () => {
   TwitchBot.say("#dustin_dm", "Feierabend! Schließt du heute ab?")
+  TwitchBot.disconnect()
 })
+
+livelistner.on("live", () => {
+TwitchBot.connect();
+});
+
+
+setTimeout(() => {
+  livelistner.emit("live")
+}, 30000);
+
+

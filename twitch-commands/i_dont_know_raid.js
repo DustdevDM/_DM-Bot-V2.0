@@ -65,10 +65,7 @@ module.exports = {
               TwitchBot.say(channel, "Sorry. Aber ich konnte niemanden zum raiden finden")
             }
             else {
-              post_text.forEach(x => {
-                TwitchBot.say(channel, post_text.join(""))
-
-              })
+                TwitchBot.say(channel, post_text.join("  ---  "))
             }
           }, 1500)
         })
