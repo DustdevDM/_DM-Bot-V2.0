@@ -22,14 +22,14 @@ TwitchBot.on("connected", (addr, port) => {
 
   var postcommendloop = setInterval(() => {
     var randomspruch = [
-      [
-    "Ihr wollt Dustin unterstützen und seinen ewigen Dank erhalten? Dann gebt Dustin doch einen Euro aus eurer Sofa ritze --> https://www.tipeeestream.com/dustin-dm/donation",
-    "Ihr wollt Dustin unterstützen und seinen ewigen Dank erhalten? Dann gebt Dustin doch den Euro den ihr vorhin auf der Straße gefunden habt --> https://www.tipeeestream.com/dustin-dm/donation",
-    "Ihr wollt Dustin unterstützen und seinen ewigen Dank erhalten? Dann gebt Dustin euer komplettes Geld... Oder nur einen Euro. Der reicht auch... (fürs erste) --> https://www.tipeeestream.com/dustin-dm/donation",
-    "Ihr wollt Dustin unterstützen und seinen ewigen Dank erhalten? Dann gebt Dustin nen Euro damit er sich wieder Fake Follows kaufen kann... Eh was? --> https://www.tipeeestream.com/dustin-dm/donation",
-    "Ihr wollt Dustin unterstützen und seinen ewigen Dank erhalten? Dann gebt Dustin doch nen Euro damit er mich nicht wieder heimlich offline nimmt weil ich zu teuer bin :( --> https://www.tipeeestream.com/dustin-dm/donation",
-    "Ihr wollt Dustin unterstützen und seinen ewigen Dank erhalten? Dann gebt Dustin doch einpaar Sternis damit er Tom Nooks schulden endlich abbezahlen kann --> https://www.tipeeestream.com/dustin-dm/donation"
-  ],
+//       [
+//     "Ihr wollt Dustin unterstützen und seinen ewigen Dank erhalten? Dann gebt Dustin doch einen Euro aus eurer Sofa ritze --> https://www.tipeeestream.com/dustin-dm/donation",
+//     "Ihr wollt Dustin unterstützen und seinen ewigen Dank erhalten? Dann gebt Dustin doch den Euro den ihr vorhin auf der Straße gefunden habt --> https://www.tipeeestream.com/dustin-dm/donation",
+//     "Ihr wollt Dustin unterstützen und seinen ewigen Dank erhalten? Dann gebt Dustin euer komplettes Geld... Oder nur einen Euro. Der reicht auch... (fürs erste) --> https://www.tipeeestream.com/dustin-dm/donation",
+//     "Ihr wollt Dustin unterstützen und seinen ewigen Dank erhalten? Dann gebt Dustin nen Euro damit er sich wieder Fake Follows kaufen kann... Eh was? --> https://www.tipeeestream.com/dustin-dm/donation",
+//     "Ihr wollt Dustin unterstützen und seinen ewigen Dank erhalten? Dann gebt Dustin doch nen Euro damit er mich nicht wieder heimlich offline nimmt weil ich zu teuer bin :( --> https://www.tipeeestream.com/dustin-dm/donation",
+//     "Ihr wollt Dustin unterstützen und seinen ewigen Dank erhalten? Dann gebt Dustin doch einpaar Sternis damit er Tom Nooks schulden endlich abbezahlen kann --> https://www.tipeeestream.com/dustin-dm/donation"
+//   ],
       [
     "Wenn euch der Stream gefällt dann lasst doch nen Follow da um den nächsten Stream nicht zu verpassen!",
     "Wenn euch der Stream gefällt dann lasst doch nen Follow da um Dustin beim nächstem mal wieder Failen zu sehen",
@@ -110,10 +110,4 @@ livelistner.on("offline", () => {
 livelistner.on("live", () => {
 TwitchBot.connect();
 });
-
-
-setTimeout(() => {
-  livelistner.emit("live")
-}, 30000);
-
 
