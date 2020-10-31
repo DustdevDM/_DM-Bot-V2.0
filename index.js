@@ -30,7 +30,7 @@ console.log(`\x1b[32m${bot.user.username}\x1b[33m is now online\x1b[37m`)
 setInterval(function(){
     
 let statuses = [
-    `Codet by ${client.users.get("330380702505762817").tag}`,
+   // `Codet by ${client.users.get("330380702505762817").tag}`,
     "Botversion: " + config.version,
     "Bot Ping: " + Math.round(client.ping),
     `Need some Help? ${config.prefix}help`,
