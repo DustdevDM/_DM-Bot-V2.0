@@ -23,7 +23,7 @@ fetch(`https://id.twitch.tv/oauth2/token?client_id=${config.twitch.api.clientID}
 //179697954
 setTimeout(() => { var checkforonline = schedule.scheduleJob("*/1 * * * *", function(){
     
-fetch("https://api.twitch.tv/helix/streams?user_id=179697954", {headers: {"Client-ID": config.twitch.api.clientID, "Authorization": `Bearer ${barer}`}}).then(res => res.json())
+fetch("https://api.twitch.tv/helix/streams?user_id=" + config.twitch.userids, {headers: {"Client-ID": config.twitch.api.clientID, "Authorization": `Bearer ${barer}`}}).then(res => res.json())
 .then(json => {
     //Dustin is not Streaming
     if (json.data.length == 0){

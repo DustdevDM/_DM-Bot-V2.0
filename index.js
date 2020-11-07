@@ -51,7 +51,7 @@ for (const file of commandFiles) {
 	const command = require(`./dc-commands/${file}`);
 
     client.commands.set(command.name, command);
-    console.log("Found an command => " + command.name)
+    console.log("[Discord] Found an command => " + command.name)
 }
 client.on("message", (message) => {
 
