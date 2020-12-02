@@ -12,7 +12,7 @@ livelistner.on("live", () => {
     fetch("https://tmi.twitch.tv/group/user/dustin_dm/chatters").then(res => res.json()).then(json => {
     
     json.chatters.moderators.forEach(async v => {
-        var vidb = await VIEWER.findOne({"twitchnick": v})
+        var vidb = await VIEWER.findOne({"twitchnick": v.toLocaleLowerCase()})
         if (vidb){
     
           await VIEWER.findOneAndUpdate({"twitch": vidb.twitch}, {"watchtime": vidb.watchtime + 5})
@@ -20,7 +20,7 @@ livelistner.on("live", () => {
     });
     
     json.chatters.vips.forEach(async v => {
-        var vidb = await VIEWER.findOne({"twitchnick": v})
+        var vidb = await VIEWER.findOne({"twitchnick": v.toLocaleLowerCase()})
         if (vidb){
     
             await VIEWER.findOneAndUpdate({"twitch": vidb.twitch}, {"watchtime": vidb.watchtime + 5})
@@ -28,7 +28,7 @@ livelistner.on("live", () => {
     });
     
     json.chatters.viewers.forEach(async v => {
-        var vidb = await VIEWER.findOne({"twitchnick": v})
+        var vidb = await VIEWER.findOne({"twitchnick": v.toLocaleLowerCase()})
         if (vidb){
     
             await VIEWER.findOneAndUpdate({"twitch": vidb.twitch}, {"watchtime": vidb.watchtime + 5})
@@ -36,7 +36,7 @@ livelistner.on("live", () => {
     });
     
     json.chatters.broadcaster.forEach(async v => {
-        var vidb = await VIEWER.findOne({"twitchnick": v})
+        var vidb = await VIEWER.findOne({"twitchnick": v.toLocaleLowerCase()})
         if (vidb){
     
             await VIEWER.findOneAndUpdate({"twitch": vidb.twitch}, {"watchtime": vidb.watchtime + 5})
