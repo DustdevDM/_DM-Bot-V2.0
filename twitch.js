@@ -93,10 +93,12 @@ TwitchBot.on("message",async (target, context, msg, self) => {
   if (viewercache.find(v => context["user-id"] === v)) return;
   //if db
   var vdb = await viewerdb.find({"twitch": context["user-id"]})
-  if (vdb.length > 0) return viewercache.push(`${context["user-id"]}`)
-  // create
+  if (vdb.length > 0){ viewercache.push(`${context["user-id"]}`)
+    if (vdb[0].twitchnick == null){ await viewerdb.findOneAndUpdate({"twitch": context["user-id"]}, {"twitchnick": context["username"]}) }
+    return;
+  }// create
   viewercache.push(`${context["user-id"]}`)
-   await new viewerdb({twitch: `${context["user-id"]}`}).save().then(
+   await new viewerdb({twitch: `${context["user-id"]}`, twitchnick: context["username"]}).save().then(
     TwitchBot.say(target,"Hey @" + context["display-name"])
   )
 })
