@@ -2,7 +2,7 @@ const {client, config} = require('./index.js')
 const fs = require("fs")
 
 require("./twitch-events/livechecker")
-require("./twitch-events/twitch event webhook")
+// require("./twitch-events/twitch event webhook")
 const {livelistner} = require("./twitch-events/livechecker")
 
 const tmi = require('tmi.js');
